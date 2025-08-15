@@ -18,9 +18,9 @@
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             color: #ffffff;
             overflow-x: hidden;
+            min-height: 100vh;
         }
         
-        /* Logo Animation Styles */
         .logo-container {
             position: fixed;
             top: 50%;
@@ -62,7 +62,6 @@
             50% { transform: translateY(-10px); }
         }
         
-        /* Menu Container */
         .menu-container {
             opacity: 0;
             transform: translateY(50px);
@@ -98,7 +97,6 @@
             letter-spacing: 1px;
         }
         
-        /* Menu Categories */
         .menu-category {
             margin-bottom: 80px;
         }
@@ -125,7 +123,7 @@
         
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
             padding: 0 20px;
         }
@@ -190,7 +188,6 @@
             font-weight: 500;
         }
         
-        /* Responsive Design */
         @media (max-width: 768px) {
             .menu-title {
                 font-size: 2.5rem;
@@ -213,21 +210,18 @@
     </style>
 </head>
 <body>
-    <!-- Animated Logo -->
     <div class="logo-container" id="logoContainer">
         <div class="logo">
             <div class="logo-text">RESTO</div>
         </div>
     </div>
 
-    <!-- Menu Content -->
     <div class="menu-container" id="menuContainer">
         <div class="menu-header">
             <h1 class="menu-title">Culinary Excellence</h1>
             <p class="menu-subtitle">A Journey Through Exquisite Flavors</p>
         </div>
 
-        <!-- Appetizers -->
         <div class="menu-category">
             <h2 class="category-title">Appetizers</h2>
             <div class="menu-grid">
@@ -257,7 +251,6 @@
             </div>
         </div>
 
-        <!-- Main Courses -->
         <div class="menu-category">
             <h2 class="category-title">Main Courses</h2>
             <div class="menu-grid">
@@ -311,7 +304,6 @@
             </div>
         </div>
 
-        <!-- Desserts -->
         <div class="menu-category">
             <h2 class="category-title">Desserts</h2>
             <div class="menu-grid">
@@ -343,25 +335,19 @@
     </div>
 
     <script>
-        // Logo animation and menu reveal
         window.addEventListener('load', function() {
             const logoContainer = document.getElementById('logoContainer');
             const menuContainer = document.getElementById('menuContainer');
             
-            // After 2 seconds, move logo and show menu
-            setTimeout(() => {
+            setTimeout(function() {
                 logoContainer.classList.add('moved');
                 
-                // Show menu after logo animation completes
-                setTimeout(() => {
+                setTimeout(function() {
                     menuContainer.classList.add('visible');
                 }, 500);
             }, 2000);
         });
-
-        // Add smooth scroll behavior for better UX
-        document.documentElement.style.scrollBehavior = 'smooth';
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96fb53fe42199a77',t:'MTc1NTI4ODU1MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-  </html>
-  
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96fb637e323b9aa5',t:'MTc1NTI4OTE4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    </html>
+    
