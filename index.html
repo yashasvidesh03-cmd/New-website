@@ -4,18 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The 90's Club - Menu</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: "Inter", sans-serif;
       background: #0a0a0a;
-      color: #ffffff;
+      color: #fff;
       overflow: hidden;
       line-height: 1.6;
     }
@@ -43,7 +38,7 @@
     }
     .main-title {
       font-family: "Cormorant Garamond", serif; font-size: 2.5rem;
-      font-weight: 300; color: #ffffff; letter-spacing: 3px; margin-bottom: 6px;
+      font-weight: 300; color: #fff; letter-spacing: 3px; margin-bottom: 6px;
     }
     .subtitle {
       font-size: 1rem; color: #d4af37; opacity: 0.9;
@@ -58,7 +53,7 @@
     .section-header { text-align: center; margin-bottom: 80px; }
     .section-title {
       font-family: "Cormorant Garamond", serif;
-      font-size: 3rem; font-weight: 300; color: #ffffff; margin-bottom: 20px;
+      font-size: 3rem; font-weight: 300; color: #fff; margin-bottom: 20px;
       position: relative; letter-spacing: 2px;
     }
     .section-title::after {
@@ -81,7 +76,7 @@
       content: ""; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px;
       background: #d4af37; transform: scaleX(0); transition: transform 0.3s ease;
     }
-    .tab-btn:hover, .tab-btn.active { color: #ffffff; }
+    .tab-btn:hover, .tab-btn.active { color: #fff; }
     .tab-btn.active::after { transform: scaleX(1); }
     .menu-category { display: none; }
     .menu-category.active { display: block; animation: fadeIn 0.6s ease-out; }
@@ -111,7 +106,7 @@
     }
     .dish-name {
       font-family: "Cormorant Garamond", serif; font-size: 1.4rem; font-weight: 500;
-      color: #ffffff; letter-spacing: 1px;
+      color: #fff; letter-spacing: 1px;
     }
     .dish-price {
       font-family: "Inter", sans-serif; font-size: 1.1rem; font-weight: 400;
@@ -131,7 +126,7 @@
     }
     .view-3d-btn:hover {
       background: rgba(212,175,55,0.1);
-      border-color: #d4af37; color: #ffffff;
+      border-color: #d4af37; color: #fff;
     }
     .popularity-badge {
       background: transparent; color: #d4af37; padding: 4px 0;
@@ -150,8 +145,7 @@
       background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
       border: 1px solid rgba(212,175,55,0.2);
       padding: 40px; max-width: 90vw; max-height: 90vh;
-      width: 800px; height: 600px; position: relative;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+      width: 800px; height: 600px; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8);
     }
     .modal-header {
       display: flex; justify-content: space-between; align-items: center;
@@ -160,7 +154,7 @@
     }
     .modal-title {
       font-family: "Cormorant Garamond", serif; font-size: 1.6rem;
-      color: #ffffff; margin: 0; font-weight: 400;
+      color: #fff; margin: 0; font-weight: 400;
     }
     .close-btn {
       background: transparent; border: 1px solid rgba(212,175,55,0.4); color: #d4af37;
@@ -168,7 +162,7 @@
       display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
       font-weight: 300;
     }
-    .close-btn:hover { background: rgba(212,175,55,0.1); border-color: #d4af37; color: #ffffff; }
+    .close-btn:hover { background: rgba(212,175,55,0.1); border-color: #d4af37; color: #fff; }
     .viewer-container {
       width: 100%; height: calc(100% - 100px);
       background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
@@ -190,6 +184,7 @@
   </style>
 </head>
 <body>
+  <!-- Logo Bar -->
   <div class="logo-bar" id="logoBar">
     <div class="logo-main">
       <div class="logo-text">THE<br />90'S<br />CLUB</div>
@@ -197,6 +192,7 @@
     <h1 class="main-title">The 90's Club</h1>
     <p class="subtitle">Fine Dining Experience</p>
   </div>
+  <!-- Full Menu Section (hidden initially) -->
   <div class="menu-full" id="menuFull">
     <div class="container">
       <div class="section-header">
@@ -339,8 +335,6 @@
           id="mainModelViewer"
           src=""
           alt="3D Dish Model"
-          ar
-          ar-modes="webxr scene-viewer quick-look"
           camera-controls
           shadow-intensity="1"
           style="width: 100%; height: 400px; background: #181818; border-radius: 8px;"
@@ -375,19 +369,15 @@
     function open3DViewer(dishName) {
       const model = modelMap[dishName];
       if (!model) return;
-
-      // Scene Viewer intent URL for Android
-      const intentUrl =
-        `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(model.url)}&mode=ar_preferred#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(location.href)};end;`;
-
-      // Detect Android
       const ua = navigator.userAgent.toLowerCase();
       const isAndroid = ua.indexOf("android") > -1;
-
       if (isAndroid) {
-        window.location.href = intentUrl; // Open Scene Viewer on Android
+        // Open in Google Scene Viewer on Android
+        const intent =
+          `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(model.url)}&mode=ar_preferred&title=${encodeURIComponent(model.title)}#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(location.href)};end;`;
+        window.location.href = intent;
       } else {
-        // Fallback for non-Android: use model-viewer modal
+        // Fallback: open in modal-viewer on desktop/iOS
         document.getElementById("mainModelViewer").src = model.url;
         document.getElementById("modelTitle").innerText = model.title + " 3D View";
         document.getElementById("modalOverlay").classList.add("active");
@@ -411,5 +401,5 @@
     };
   </script>
 </body>
-    </html>
-  
+      </html>
+        
