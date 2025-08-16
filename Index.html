@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The 90's Club - Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Logo Bar -->
+  <div class="logo-bar" id="logoBar">
+    <div class="logo-main">
+      <div class="logo-text">THE<br />90'S<br />CLUB</div>
+    </div>
+    <h1 class="main-title">The 90's Club</h1>
+    <p class="subtitle">Fine Dining Experience</p>
+  </div>
+
+  <!-- Full Menu Section (hidden initially) -->
+  <div class="menu-full" id="menuFull">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Menu</h2>
+        <p class="section-subtitle">Curated Selection</p>
+      </div>
+      <!-- Category Tabs -->
+      <div class="category-tabs">
+        <button class="tab-btn active" onclick="showCategory('appetizers')">Appetizers</button>
+        <button class="tab-btn" onclick="showCategory('mains')">Main Courses</button>
+        <button class="tab-btn" onclick="showCategory('desserts')">Desserts</button>
+      </div>
+
+      <!-- Appetizers -->
+      <div class="menu-category active" id="appetizers">
+        <div class="menu-grid">
+          <div>
+            <div class="menu-card">
+              <div class="card-content">
+                <div class="dish-info">
+                  <div class="dish-header">
+                    <h3 class="dish-name">Truffle Arancini</h3>
+                    <div class="dish-price">$18</div>
+                  </div>
+                  <p class="dish-description">
+                    Crispy risotto balls infused with black truffle, aged parmesan, and herb aioli
+                  </p>
+                  <div class="card-actions">
+                    <button class="view-3d-btn" onclick="open3DViewer('Truffle Arancini')">VIEW 3D</button>
+                    <span class="popularity-badge">SIGNATURE</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="menu-card">
+              <div class="card-content">
+                <div class="dish-info">
+                  <div class="dish-header">
+                    <h3 class="dish-name">Seared Scallops</h3>
+                    <div class="dish-price">$24</div>
+                  </div>
+                  <p class="dish-description">
+                    Pan-seared scallops with cauliflower purée, pancetta crisps, and microgreens
+                  </p>
+                  <div class="card-actions">
+                    <button class="view-3d-btn" onclick="open3DViewer('Seared Scallops')">VIEW 3D</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="menu-card">
+              <div class="card-content">
+                <div class="dish-info">
+                  <div class="dish-header">
+                    <h3 class="dish-name">Burrata Caprese</h3>
+                    <div class="dish-price">$16</div>
+                  </div>
+                  <p class="dish-description">
+                    Fresh burrata with heirloom tomatoes, basil oil, and aged balsamic reduction
+                  </p>
+                  <div class="card-actions">
+                    <button class="view-3d-btn" onclick="open3DViewer('Burrata Caprese')">VIEW 3D</button>
+                    <span class="popularity-badge">POPULAR</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Courses -->
+      <div class="menu-category" id="mains">
+        <div class="menu-grid">
+          <div>
+            <div class="menu-card">
+              <div class="card-content">
+                <div class="dish-info">
+                  <div class="dish-header">
+                    <h3 class="dish-name">Rosemary Lamb Chops</h3>
+                    <div class="dish-price">$38</div>
+                  </div>
+                  <p class="dish-description">
+                    Grilled lamb chops with rosemary, garlic mashed potatoes, and seasonal vegetables
+                  </p>
+                  <div class="card-actions">
+                    <button class="view-3d-btn" disabled>COMING SOON</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="menu-card">
+              <div class="card-content">
+                <div class="dish-info">
+                  <div class="dish-header">
+                    <h3 class="dish-name">Miso Glazed Salmon</h3>
+                    <div class="dish-price">$32</div>
+                  </div>
+                  <p class="dish-description">
+                    Atlantic salmon fillet glazed with miso, soba noodles, bok choy, and ponzu sauce
+                  </p>
+                  <div class="card-actions">
+                    <button class="view-3d-btn" disabled>COMING SOON</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desserts -->
+      <div class="menu-category" id="desserts">
+        <div class="menu-grid">
+          <div>
+            <div class="menu-card">
+              <div class="card-content">
+                <div class="dish-info">
+                  <div class="dish-header">
+                    <h3 class="dish-name">Classic Tiramisu</h3>
+                    <div class="dish-price">$12</div>
+                  </div>
+                  <p class="dish-description">
+                    Traditional Italian tiramisu with espresso-soaked ladyfingers and mascarpone cream
+                  </p>
+                  <div class="card-actions">
+                    <button class="view-3d-btn" disabled>COMING SOON</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="menu-card">
+              <div class="card-content">
+                <div class="dish-info">
+                  <div class="dish-header">
+                    <h3 class="dish-name">Chocolate Fondant</h3>
+                    <div class="dish-price">$14</div>
+                  </div>
+                  <p class="dish-description">
+                    Warm chocolate cake with a molten center, served with vanilla bean gelato
+                  </p>
+                  <div class="card-actions">
+                    <button class="view-3d-btn" disabled>COMING SOON</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3D Model Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title" id="modelTitle"></span>
+        <button class="close-btn" onclick="close3DViewer()">&times;</button>
+      </div>
+      <div class="viewer-container">
+        <model-viewer
+          id="mainModelViewer"
+          src=""
+          alt="3D Dish Model"
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          camera-controls
+          shadow-intensity="1"
+          style="width: 100%; height: 400px; background: #181818; border-radius: 8px;"
+        ></model-viewer>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script src="scripts.js"></script>
+</body>
+    </html>
+                      
