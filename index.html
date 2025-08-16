@@ -3,8 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The 90's Club - Menu</title>
+  <title>The 90's Club – Fine Dining Experience</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="The 90's Club – Fine dining experience with 3D dish previews and AR menus." />
+  <meta name="keywords" content="fine dining, 3D menu, AR restaurant, The 90's Club, gourmet food, interactive menu" />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://yashasvidesh03-cmd.github.io/New-website/" />
+
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="The 90's Club – Fine Dining Experience" />
+  <meta property="og:description" content="Explore our curated menu with immersive 3D and AR previews." />
+  <meta property="og:url" content="https://yashasvidesh03-cmd.github.io/New-website/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://yashasvidesh03-cmd.github.io/New-website/path-to-your-image.jpg" />
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -85,8 +101,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
       gap: 0;
     }
     .menu-card {
@@ -189,7 +204,6 @@
     }
     .ar-btn:hover { background: #d4af37; color: #0a0a0a; }
 
-    /* -------- MOBILE STYLES -------- */
     @media (max-width: 768px) {
       .main-title { font-size: 1.4rem; }
       .logo-bar { top: 12px; }
@@ -413,19 +427,16 @@
       const model = modelMap[dishName];
       if (!model) return;
 
-      // Show 3D model in modal first (all devices)
       document.getElementById("mainModelViewer").src = model.url;
       document.getElementById("modelTitle").innerText = model.title + " 3D View";
       document.getElementById("modalOverlay").classList.add("active");
 
-      // Show AR button for Android devices
       const ua = navigator.userAgent.toLowerCase();
       const isAndroid = ua.indexOf("android") > -1;
       const arBtn = document.getElementById("arBtn");
       if (isAndroid) {
         arBtn.style.display = "block";
         arBtn.onclick = function () {
-          // Launch Google Scene Viewer
           const intent =
             `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(model.url)}&mode=ar_preferred&title=${encodeURIComponent(model.title)}#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(location.href)};end;`;
           window.location.href = intent;
@@ -437,8 +448,9 @@
     function close3DViewer() {
       document.getElementById("modalOverlay").classList.remove("active");
       document.getElementById("mainModelViewer").src = "";
-      document.getElementById("arBtn").style.display = "none";
-      document.getElementById("arBtn").onclick = null;
+      const arBtn = document.getElementById("arBtn");
+      arBtn.style.display = "none";
+      arBtn.onclick = null;
     }
     document.getElementById("modalOverlay").onclick = function (event) {
       if (event.target === this) close3DViewer();
