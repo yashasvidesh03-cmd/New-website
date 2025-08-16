@@ -169,6 +169,22 @@
       display: flex; align-items: center; justify-content: center;
       border: 1px solid rgba(212,175,55,0.1); position: relative; overflow: hidden;
     }
+    .ar-btn {
+      background: rgba(212,175,55,0.1);
+      color: #d4af37;
+      border: 1px solid #d4af37;
+      padding: 12px 24px;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 8px;
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      transition: all 0.3s ease;
+      z-index: 10;
+      display: none;
+    }
+    .ar-btn:hover { background: #d4af37; color: #0a0a0a; }
     @media (max-width: 768px) {
       .main-title { font-size: 2.5rem; }
       .section-title { font-size: 2rem; }
@@ -180,6 +196,7 @@
       .card-content { flex-direction: column; gap: 20px; }
       .dish-header { flex-direction: column; align-items: flex-start; gap: 8px; }
       .modal-content { width: 95vw; height: 450px; padding: 12px; }
+      .ar-btn { bottom: 10px; right: 10px; padding: 8px 14px; font-size: 0.9em; }
     }
   </style>
 </head>
@@ -339,6 +356,7 @@
           shadow-intensity="1"
           style="width: 100%; height: 400px; background: #181818; border-radius: 8px;"
         ></model-viewer>
+        <button class="ar-btn" id="arBtn" style="display: none;">View in AR (Camera)</button>
       </div>
     </div>
   </div>
@@ -369,23 +387,33 @@
     function open3DViewer(dishName) {
       const model = modelMap[dishName];
       if (!model) return;
+
+      // Show 3D model in modal first (all devices)
+      document.getElementById("mainModelViewer").src = model.url;
+      document.getElementById("modelTitle").innerText = model.title + " 3D View";
+      document.getElementById("modalOverlay").classList.add("active");
+
+      // Show AR button for Android devices
       const ua = navigator.userAgent.toLowerCase();
       const isAndroid = ua.indexOf("android") > -1;
+      const arBtn = document.getElementById("arBtn");
       if (isAndroid) {
-        // Open in Google Scene Viewer on Android
-        const intent =
-          `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(model.url)}&mode=ar_preferred&title=${encodeURIComponent(model.title)}#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(location.href)};end;`;
-        window.location.href = intent;
+        arBtn.style.display = "block";
+        arBtn.onclick = function () {
+          // Launch Google Scene Viewer
+          const intent =
+            `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(model.url)}&mode=ar_preferred&title=${encodeURIComponent(model.title)}#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(location.href)};end;`;
+          window.location.href = intent;
+        };
       } else {
-        // Fallback: open in modal-viewer on desktop/iOS
-        document.getElementById("mainModelViewer").src = model.url;
-        document.getElementById("modelTitle").innerText = model.title + " 3D View";
-        document.getElementById("modalOverlay").classList.add("active");
+        arBtn.style.display = "none";
       }
     }
     function close3DViewer() {
       document.getElementById("modalOverlay").classList.remove("active");
       document.getElementById("mainModelViewer").src = "";
+      document.getElementById("arBtn").style.display = "none";
+      document.getElementById("arBtn").onclick = null;
     }
     document.getElementById("modalOverlay").onclick = function (event) {
       if (event.target === this) close3DViewer();
@@ -401,5 +429,5 @@
     };
   </script>
 </body>
-      </html>
-        
+  </html>
+  
