@@ -16,7 +16,11 @@
   <meta property="og:description" content="Explore our curated menu with immersive 3D and AR previews." />
   <meta property="og:url" content="https://yashasvidesh03-cmd.github.io/New-website/" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://yashasvidesh03-cmd.github.io/New-website/path-to-your-image.jpg" />
+  <meta property="og:image" content="https://yashasvidesh03-cmd.github.io/New-website/image.jpg.jpeg" />
+
+  <!-- Twitter sharing -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://yashasvidesh03-cmd.github.io/New-website/image.jpg.jpeg">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -46,11 +50,16 @@
       border-radius: 50%; display: flex; align-items: center; justify-content: center;
       box-shadow: 0 10px 30px rgba(212,175,55,0.2);
       border: 1px solid rgba(212,175,55,0.3);
+      overflow: hidden;
     }
-    .logo-text {
-      font-family: "Cormorant Garamond", serif; font-size: 1.2rem;
-      font-weight: 600;
-      color: #0a0a0a; text-align: center; line-height: 1.1; letter-spacing: 1px;
+    .logo-main img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      display: block;
+      object-fit: cover;
+      margin: 0 auto;
+      background: #000;
     }
     .main-title {
       font-family: "Cormorant Garamond", serif; font-size: 2.5rem;
@@ -209,7 +218,7 @@
       .logo-bar { top: 12px; }
       .logo-bar.moved-left { left: 15px; top: 8px; }
       .logo-main { width: 70px; height: 70px; margin-bottom: 8px; }
-      .logo-text { font-size: 0.8rem; }
+      .logo-main img { width: 56px; height: 56px; }
       .menu-full { padding-left: 0; }
       .container { padding: 10px 4vw 80px 4vw; }
       .section-header, .section-title { margin-bottom: 28px !important; }
@@ -243,7 +252,7 @@
   <!-- Logo Bar -->
   <div class="logo-bar" id="logoBar">
     <div class="logo-main">
-      <div class="logo-text">THE<br />90'S<br />CLUB</div>
+      <img src="image.jpg.jpeg" alt="The 90's Club Logo" />
     </div>
     <h1 class="main-title">The 90's Club</h1>
     <p class="subtitle">Fine Dining Experience</p>
@@ -458,13 +467,4 @@
     window.onload = function () {
       setTimeout(() => {
         const logoBar = document.getElementById("logoBar");
-        const menuFull = document.getElementById("menuFull");
-        logoBar.classList.add("moved-left");
-        menuFull.style.display = "block";
-        document.body.style.overflow = "hidden";
-      }, 3000);
-    };
-  </script>
-</body>
-  </html>
-  
+        const menuFull = document.getEleme
