@@ -85,7 +85,8 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .menu-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
       gap: 0;
     }
     .menu-card {
@@ -146,6 +147,7 @@
       border: 1px solid rgba(212,175,55,0.2);
       padding: 40px; max-width: 90vw; max-height: 90vh;
       width: 800px; height: 600px; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+      display: flex; flex-direction: column;
     }
     .modal-header {
       display: flex; justify-content: space-between; align-items: center;
@@ -168,6 +170,7 @@
       background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
       display: flex; align-items: center; justify-content: center;
       border: 1px solid rgba(212,175,55,0.1); position: relative; overflow: hidden;
+      flex: 1;
     }
     .ar-btn {
       background: rgba(212,175,55,0.1);
@@ -185,18 +188,40 @@
       display: none;
     }
     .ar-btn:hover { background: #d4af37; color: #0a0a0a; }
+
+    /* -------- MOBILE STYLES -------- */
     @media (max-width: 768px) {
-      .main-title { font-size: 2.5rem; }
-      .section-title { font-size: 2rem; }
-      .menu-grid { grid-template-columns: 1fr; }
-      .container { padding: 0 20px; }
+      .main-title { font-size: 1.4rem; }
+      .logo-bar { top: 12px; }
+      .logo-bar.moved-left { left: 15px; top: 8px; }
+      .logo-main { width: 70px; height: 70px; margin-bottom: 8px; }
+      .logo-text { font-size: 0.8rem; }
+      .menu-full { padding-left: 0; }
+      .container { padding: 10px 4vw 80px 4vw; }
+      .section-header, .section-title { margin-bottom: 28px !important; }
+      .section-title { font-size: 1.3rem; }
+      .section-title::after { bottom: -5px; width: 30px; }
+      .section-subtitle { font-size: 0.73rem; }
       .category-tabs { flex-direction: column; gap: 0; border-bottom: none; }
-      .tab-btn { padding: 15px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .tab-btn { padding: 9px 14px; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
       .tab-btn::after { display: none; }
-      .card-content { flex-direction: column; gap: 20px; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .menu-card { padding: 22px 0; }
+      .card-content { flex-direction: column; gap: 12px; }
       .dish-header { flex-direction: column; align-items: flex-start; gap: 8px; }
-      .modal-content { width: 95vw; height: 450px; padding: 12px; }
-      .ar-btn { bottom: 10px; right: 10px; padding: 8px 14px; font-size: 0.9em; }
+      .dish-name { font-size: 1.09rem; }
+      .dish-price { font-size: 1rem; }
+      .dish-description { font-size: 0.85rem; margin-bottom: 12px; }
+      .view-3d-btn { font-size: 0.88rem; padding: 6px 12px; }
+      .ar-btn {
+        padding: 9px 13px; font-size: 0.92em; bottom: 7vw; right: 7vw;
+      }
+      .modal-content { width: 98vw; height: 86vw; min-height: 310px; max-height: 97vh; padding: 8px; }
+      .modal-header { margin-bottom: 13px; padding-bottom: 7px; }
+      .modal-title { font-size: 1rem; }
+      .close-btn { width: 32px; height: 32px; font-size: 1.08rem; padding: 7px 7px; }
+      .viewer-container { height: calc(100% - 60px); }
+      model-viewer { height: 170px !important; min-height: 130px !important; }
     }
   </style>
 </head>
@@ -354,7 +379,7 @@
           alt="3D Dish Model"
           camera-controls
           shadow-intensity="1"
-          style="width: 100%; height: 400px; background: #181818; border-radius: 8px;"
+          style="width: 100%; height: 100%; background: #181818; border-radius: 8px;"
         ></model-viewer>
         <button class="ar-btn" id="arBtn" style="display: none;">View in AR (Camera)</button>
       </div>
