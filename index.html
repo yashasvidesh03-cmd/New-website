@@ -33,27 +33,27 @@
     .logo-bar {
       position: fixed;
       top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
+      right: 60px;
+      transform: none;
       z-index: 1100;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-end;
       transition:
-        left 1s cubic-bezier(0.77,0,0.18,1),
+        right 1s cubic-bezier(0.77,0,0.18,1),
         top 1s cubic-bezier(0.77,0,0.18,1),
         transform 1s cubic-bezier(0.77,0,0.18,1);
     }
-    .logo-bar.moved-left {
-      left: 60px;
+    .logo-bar.moved-right {
+      right: 60px;
       top: 40px;
       transform: none;
-      align-items: flex-start;
+      align-items: flex-end;
     }
     .logo-main {
-      width: 120px;
-      height: 120px;
-      margin-bottom: 14px;
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
       background: linear-gradient(135deg, #d4af37 0%, #f4e4a6 100%);
       border-radius: 50%;
       display: flex;
@@ -64,8 +64,8 @@
       overflow: hidden;
     }
     .logo-main img {
-      width: 90px;
-      height: 90px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       object-fit: cover;
       display: block;
@@ -73,22 +73,22 @@
     }
     .main-title {
       font-family: "Cormorant Garamond", serif;
-      font-size: 2.3rem;
+      font-size: 1.4rem;
       font-weight: 300;
       color: #fff;
       letter-spacing: 3px;
-      margin-bottom: 6px;
-      text-align: center;
+      margin-bottom: 4px;
+      text-align: right;
     }
     .subtitle {
-      font-size: 1rem;
+      font-size: 0.85rem;
       color: #d4af37;
       opacity: 0.9;
       font-weight: 300;
       letter-spacing: 4px;
       text-transform: uppercase;
-      margin-left: 2px;
-      text-align: center;
+      margin-left: 0;
+      text-align: right;
     }
     .menu-full {
       position: fixed;
@@ -304,10 +304,10 @@
 
     @media (max-width: 768px) {
       .main-title { font-size: 1.4rem; }
-      .logo-bar { top: 12px; }
-      .logo-bar.moved-left { left: 15px; top: 8px; }
-      .logo-main { width: 70px; height: 70px; margin-bottom: 8px; }
-      .logo-main img { width: 56px; height: 56px; }
+      .logo-bar { top: 12px; right: 15px; }
+      .logo-bar.moved-right { right: 15px; top: 8px; }
+      .logo-main { width: 50px; height: 50px; margin-bottom: 6px; }
+      .logo-main img { width: 40px; height: 40px; }
       .menu-full { padding-left: 0; }
       .container { padding: 10px 4vw 80px 4vw; }
       .section-header, .section-title { margin-bottom: 28px !important; }
@@ -499,6 +499,7 @@
       </div>
     </div>
   </div>
+
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <script>
     function showCategory(category) {
@@ -558,15 +559,13 @@
 
     // Splash and menu animation
     window.onload = function () {
+      const logoBar = document.getElementById("logoBar");
+      const menuFull = document.getElementById("menuFull");
+      logoBar.classList.add("moved-right");
       setTimeout(() => {
-        const logoBar = document.getElementById("logoBar");
-        const menuFull = document.getElementById("menuFull");
-        logoBar.classList.add("moved-left");
-        setTimeout(() => {
-          menuFull.classList.add("active");
-        }, 1000); // Menu fade in after logo moves (1s for smooth effect)
-      }, 2000); // Logo center display 2 seconds
+        menuFull.classList.add("active");
+      }, 1000); // Menu fade in after logo moves (smooth effect)
     };
   </script>
 </body>
-</html>                                                                                                                                                                                                                                                                           
+</html>
