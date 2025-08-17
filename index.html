@@ -500,72 +500,114 @@
     </div>
   </div>
 
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <script>
-    function showCategory(category) {
-      const cats = document.querySelectorAll(".menu-category");
-      const tabs = document.querySelectorAll(".tab-btn");
-      cats.forEach((c) => c.classList.remove("active"));
-      tabs.forEach((t) => t.classList.remove("active"));
-      document.getElementById(category).classList.add("active");
-      event.target.classList.add("active");
-    }
-    const modelMap = {
-      "Truffle Arancini": {
-        url: "model_1.glb",
-        title: "Truffle Arancini",
-      },
-      "Seared Scallops": {
-        url: "model_2.glb",
-        title: "Seared Scallops",
-      },
-      "Burrata Caprese": {
-        url: "model_3.glb",
-        title: "Burrata Caprese",
-      },
-    };
-    function open3DViewer(dishName) {
-      const model = modelMap[dishName];
-      if (!model) return;
+  
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<script>
+  function showCategory(category) {
+    const cats = document.querySelectorAll(".menu-category");
+    const tabs = document.querySelectorAll(".tab-btn");
+    cats.forEach((c) => c.classList.remove("active"));
+    tabs.forEach((t) => t.classList.remove("active"));
+    document.getElementById(category).classList.add("active");
+    event.target.classList.add("active");
+  }
 
-      document.getElementById("mainModelViewer").src = model.url;
-      document.getElementById("modelTitle").innerText = model.title + " 3D View";
-      document.getElementById("modalOverlay").classList.add("active");
+  // New URLs for each dish, with both glb and usdz
+  const modelMap = {
+    "Truffle Arancini": {
+      glb: "https://raw.githubusercontent.com/yashasvidesh03-cmd/New-website/main/model_1.glb",
+      usdz: "https://raw.githubusercontent.com/yashasvidesh03-cmd/New-website/main/Abandoned__Building__Shop__Old__House.usdz",
+      title: "Truffle Arancini",
+    },
+    "Seared Scallops": {
+      glb: "https://raw.githubusercontent.com/yashasvidesh03-cmd/New-website/main/model_2.glb",
+      usdz: "https://raw.githubusercontent.com/yashasvidesh03-cmd/New-website/main/10_Genshin_Impact_Inspired_Sword_3D_Models.usdz",
+      title: "Seared Scallops",
+    },
+    "Burrata Caprese": {
+      glb: "https://raw.githubusercontent.com/yashasvidesh03-cmd/New-website/main/model_3.glb",
+      usdz: "https://raw.githubusercontent.com/yashasvidesh03-cmd/New-website/main/9_mm.usdz",
+      title: "Burrata Caprese",
+    },
+  };
 
-      const ua = navigator.userAgent.toLowerCase();
-      const isAndroid = ua.indexOf("android") > -1;
-      const arBtn = document.getElementById("arBtn");
-      if (isAndroid) {
+  // Utility to detect iOS
+  function isIOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  }
+  // Utility to detect Android
+  function isAndroid() {
+    return /android/i.test(navigator.userAgent);
+  }
+
+  function open3DViewer(dishName) {
+    const model = modelMap[dishName];
+    if (!model) return;
+
+    document.getElementById("modelTitle").innerText = model.title + " 3D View";
+    document.getElementById("modalOverlay").classList.add("active");
+    const viewerContainer = document.getElementById("mainModelViewer").parentNode;
+    // Remove old AR/3D embeds if any, then add new
+    const modelViewer = document.getElementById("mainModelViewer");
+    modelViewer.style.display = "none";
+
+    // Clean old AR anchor if any
+    let oldArLink = document.getElementById("arQuickLookAnchor");
+    if (oldArLink) oldArLink.remove();
+
+    const arBtn = document.getElementById("arBtn");
+    arBtn.style.display = "none";
+    arBtn.onclick = null;
+
+    if (isIOS()) {
+      // Show Apple AR Quick Look for usdz
+      const arLink = document.createElement("a");
+      arLink.setAttribute("rel", "ar");
+      arLink.setAttribute("href", model.usdz);
+      arLink.setAttribute("id", "arQuickLookAnchor");
+      arLink.innerHTML = '<button class="ar-btn" style="display:block;">View in AR</button>';
+      // Insert anchor after viewer or as child of viewer container
+      viewerContainer.appendChild(arLink);
+    } else {
+      // Show glb in model-viewer (Android/Other)
+      modelViewer.src = model.glb;
+      modelViewer.style.display = "block";
+      if (isAndroid()) {
         arBtn.style.display = "block";
         arBtn.onclick = function () {
           const intent =
-                 `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(model.url)}&mode=ar_preferred&title=${encodeURIComponent(model.title)}#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(location.href)};end;`;
+                 `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(model.glb)}&mode=ar_preferred&title=${encodeURIComponent(model.title)}#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(location.href)};end;`;
           window.location.href = intent;
         };
-      } else {
-        arBtn.style.display = "none";
       }
     }
-    function close3DViewer() {
-      document.getElementById("modalOverlay").classList.remove("active");
-      document.getElementById("mainModelViewer").src = "";
-      const arBtn = document.getElementById("arBtn");
-      arBtn.style.display = "none";
-      arBtn.onclick = null;
-    }
-    document.getElementById("modalOverlay").onclick = function (event) {
-      if (event.target === this) close3DViewer();
-    };
+  }
 
-    // Splash and menu animation
-    window.onload = function () {
-      const logoBar = document.getElementById("logoBar");
-      const menuFull = document.getElementById("menuFull");
-      logoBar.classList.add("moved-right");
-      setTimeout(() => {
-        menuFull.classList.add("active");
-      }, 1000); // Menu fade in after logo moves (smooth effect)
-    };
-  </script>
+  function close3DViewer() {
+    document.getElementById("modalOverlay").classList.remove("active");
+    document.getElementById("mainModelViewer").src = "";
+    const arBtn = document.getElementById("arBtn");
+    arBtn.style.display = "none";
+    arBtn.onclick = null;
+    // Clean up AR Quick Look anchor if it exists
+    let oldArLink = document.getElementById("arQuickLookAnchor");
+    if (oldArLink) oldArLink.remove();
+    // Reset viewer
+    document.getElementById("mainModelViewer").style.display = "block";
+  }
+  document.getElementById("modalOverlay").onclick = function (event) {
+    if (event.target === this) close3DViewer();
+  };
+
+  window.onload = function () {
+    const logoBar = document.getElementById("logoBar");
+    const menuFull = document.getElementById("menuFull");
+    logoBar.classList.add("moved-right");
+    setTimeout(() => {
+      menuFull.classList.add("active");
+    }, 1000);
+  };
+</script>
+  
 </body>
 </html>
